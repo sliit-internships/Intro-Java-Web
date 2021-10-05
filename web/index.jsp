@@ -24,6 +24,19 @@
                     <td><input type="submit" value="Login"></td>
                     <td><input type="reset" value="Clear"></td>
                 </tr>
+                <tr>
+                    <td colspan="2">
+                        <%
+                            String error = request.getParameter("error");
+                            if (error!=null && error.equals("1")) {
+                                out.println("Incorrect Username or Password");
+                            }
+                            else {
+                                out.println("&nbsp;");
+                            }
+                        %>
+                    </td>
+                </tr>
             </table>
         </form>
     </body>

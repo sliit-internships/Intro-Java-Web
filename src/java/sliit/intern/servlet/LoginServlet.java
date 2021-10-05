@@ -26,12 +26,10 @@ public class LoginServlet extends HttpServlet {
             stmt.setString(2, request.getParameter("password"));
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                PrintWriter out = response.getWriter();
-                out.println("user exists with id " + rs.getInt(1));
+                response.sendRedirect("home.jsp");
             }
             else {
-                PrintWriter out = response.getWriter();
-                out.println("user does not exist: " + request.getParameter("username"));
+                response.sendRedirect("index.jsp?error=1");
             }
         } catch (Exception e) {
             throw new ServletException(e);
