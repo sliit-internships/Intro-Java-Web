@@ -7,5 +7,7 @@
     </head>
     <body>
         <h1>This is the Home Page of User</h1>
+        
+        <a href="LogoutServlet">Logout</a>
     </body>
 </html>

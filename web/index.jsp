@@ -31,6 +31,12 @@
                             if (error!=null && error.equals("1")) {
                                 out.println("Incorrect Username or Password");
                             }
+                            else if (error!=null && error.equals("2")) {
+                                out.println("You must Login to Continue");
+                            }
+                            else if (error!=null && error.equals("3")) {
+                                out.println("You have successfully Logged Out");
+                            }
                             else {
                                 out.println("&nbsp;");
                             }
