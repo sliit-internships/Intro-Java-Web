@@ -26,6 +26,7 @@ public class LoginServlet extends HttpServlet {
             stmt.setString(2, request.getParameter("password"));
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                request.getSession().setAttribute("login", rs.getInt(1));
                 response.sendRedirect("home.jsp");
             }
             else {
