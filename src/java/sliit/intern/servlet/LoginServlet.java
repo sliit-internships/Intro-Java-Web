@@ -2,6 +2,9 @@ package sliit.intern.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +18,21 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            PrintWriter out = response.getWriter();
-            out.println("Hello World Servlet");
-
             ServletContext context = getServletContext();
-            DB.connect(context);
-            out.println("DB Connection Successful");
+            Connection c = DB.connect(context);
+            
+            PreparedStatement stmt = c.prepareStatement("select id from student where username=? and password=?");
+            stmt.setString(1, request.getParameter("username"));
+            stmt.setString(2, request.getParameter("password"));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                PrintWriter out = response.getWriter();
+                out.println("user exists with id " + rs.getInt(1));
+            }
+            else {
+                PrintWriter out = response.getWriter();
+                out.println("user does not exist: " + request.getParameter("username"));
+            }
         } catch (Exception e) {
             throw new ServletException(e);
         }
